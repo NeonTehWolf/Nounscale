@@ -1,12 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="109.96mm" height="74.135mm" version="1.1" viewBox="0 0 109.96 74.135" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <defs>
-        <linearGradient id="a" x1="300.23" x2="355.11" y1="86.769" y2="128.07" gradientTransform="matrix(1.9079 0 0 1.9079 -536.76 -61.796)" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#8d5fd3" offset="0"/>
-            <stop stop-color="#3771c8" offset="1"/>
-        </linearGradient>
-    </defs>
-    <g transform="translate(-31.994 -103.13)">
-        <text x="144.545" y="175.97276" fill="url(#a)" font-family="'TheMix C4s'" font-size="107.91px" font-weight="bold" letter-spacing="0px" stroke-width="2.6978" word-spacing="0px" style="line-height:0.75" xml:space="preserve"><tspan x="144.545" y="175.97276" fill="url(#a)" font-family="'TheSans B9 Black'" font-weight="bold" stroke-width="2.6978" text-align="end" text-anchor="end">Ns</tspan></text>
-    </g>
-</svg>
+<svg width="109.96mm" height="74.135mm" version="1.1" viewBox="0 0 109.96 74.135" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="a" x1="300.23" x2="355.11" y1="86.769" y2="128.07" gradientTransform="matrix(1.9079 0 0 1.9079 -536.76 -61.796)" gradientUnits="userSpaceOnUse"><stop stop-color="#8d5fd3" offset="0"/><stop stop-color="#3771c8" offset="1"/></linearGradient></defs><g transform="translate(-31.994 -103.13)"><g fill="url(#a)" stroke-width="2.6978" aria-label="Ns"><path d="m95.662 175.97v-72.839h-19.316v25.467c0 4.5322 0.21582 10.144 0.75537 15.107-2.4819-5.8271-5.7192-12.41-8.8486-18.884l-10.575-21.69h-25.683v72.839h19.316v-29.783c0-4.748-0.10791-7.23-0.53955-11.546 1.8345 4.856 4.4243 10.683 7.23 16.402l12.194 24.927z"/><path d="m141.96 158.38c0-16.618-17.697-15.431-17.697-20.287 0-1.5107 1.187-2.4819 3.9927-2.4819 3.0215 0 6.2588 0.43164 8.8486 1.2949l0.43164-15.107c-2.9136-0.53955-6.1509-0.86328-8.9565-0.86328-17.374 0-24.819 8.5249-24.819 18.668 0 17.374 17.266 14.46 17.266 20.287 0 1.4028-1.5107 2.374-4.3164 2.374-3.8848 0-7.6616-0.75537-10.791-2.2661l-0.86328 15.755c3.561 0.97119 7.5537 1.5107 11.87 1.5107 14.784 0 25.035-6.9062 25.035-18.884z"/></g></g></svg>
