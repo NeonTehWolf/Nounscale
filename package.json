@@ -21,10 +21,15 @@
   },
   "homepage": "https://github.com/infi/Nounscale#readme",
   "dependencies": {
+    "connect-session-knex": "^2.0.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-handlebars": "^5.2.0",
+    "express-session": "^1.17.1",
     "knex": "^0.21.17",
+    "node-sass-middleware": "^0.11.0",
+    "serve-index": "^1.9.1",
+    "simple-statistics": "^7.4.0",
     "sqlite3": "^5.0.1"
   }
 }
