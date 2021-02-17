@@ -1,0 +1,54 @@
+{{> nav}}
+
+<div class="padding-container">
+    <h1>Settings</h1>
+    <label for="wordlist">Word List</label>
+    <div id="wordlist-wrapper">
+        <div id="wordlist-hint" style="margin-top: 1rem; margin-bottom: 1rem;" class="green-text"></div>
+        <div id="wordlist-error" style="margin-top: 1rem; margin-bottom: 1rem;" class="error-text"></div>
+        {{#if has_current_value}}
+        <select name="wordlist" id="wordlist" class="input" value={{current_value}}>
+            {{else}}
+            <select name="wordlist" id="wordlist" class="input" value="__">
+                {{/if}}
+                {{#unless has_current_value}}
+                <option value="__">Please select a value.</option>
+                {{/unless}}
+                {{#each lists}}
+                <option value="{{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+    </div>
+    <img class="loader" id="wordlist-loader" src="/images/loader.svg" alt="Loader" style="display: none;" />
+</div>
+
+<script>
+    const wordlist = document.querySelector("#wordlist")
+    const wordlistw = document.querySelector("#wordlist-wrapper")
+    const wordlistl = document.querySelector("#wordlist-loader")
+    const wordlisth = document.querySelector("#wordlist-hint")
+    const wordliste = document.querySelector("#wordlist-error")
+    wordlist.onchange = (c) => {
+        wordlistw.style.display = "none"
+        wordlistl.style.display = "block"
+        fetch("/admin/api/settings/wordlist", {
+            headers: {
+                "content-type": "application/json"
+            },
+            method: "POST",
+            body: JSON.stringify({
+                newlist: c.target.value
+            })
+        }).then(r => r.json()).then(json => {
+            wordlistw.style.display = "block"
+            wordlistl.style.display = "none"
+            if (json.error) {
+                wordlisth.innerText = ""
+                wordliste.innerText = json.error
+                return
+            }
+            wordliste.innerText = ""
+            wordlisth.innerText = "Successfully changed the word list"
+        })
+    }
+</script>

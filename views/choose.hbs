@@ -4,17 +4,37 @@
     <div class="word-upper">
         <div class="word" id="upper-word">
             <div class="i-choose">I prefer</div>
-            option one
+            <span id="upper-word-inner"></span>
         </div>
     </div>
     <div class="word-lower">
         <div class="word" id="lower-word">
             <div class="i-choose">I prefer</div>
-            another option
+            <span id="lower-word-inner"></span>
         </div>
     </div>
 </div>
 
 <script>
+    const wordWrapperUpper = document.getElementsByClassName("word-upper")[0]
+    const wordWrapperLower = document.getElementsByClassName("word-lower")[0]
 
+    const wordUpper = document.getElementById("upper-word-inner")
+    const wordLower = document.getElementById("lower-word-inner")
+
+    const handleWordFetchingError = (x) => {
+        // FIXME replace this very lazy error handling with slightly less lazy error handling
+        alert(x)
+    }
+
+    const refetchWords = () => {
+        fetch("/api/words").then(r => r.json()).then(json => {
+            if (!Array.isArray(json) || json.length !== 2) return handleWordFetchingError("Invalid response")
+
+            wordUpper.innerText = json[0]
+            wordLower.innerText = json[1]
+        })
+    }
+
+    refetchWords()
 </script>

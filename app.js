@@ -1,10 +1,18 @@
-const express = require("express")
-const hbs = require("express-handlebars")
-const cors = require("cors")
-const serveIndex = require("serve-index")
-const sassMiddleware = require('node-sass-middleware')
-const { join } = require("path")
-const knex = require("knex")({
+import express from "express"
+import hbs from "express-handlebars"
+import cors from "cors"
+import serveIndex from "serve-index"
+import sassMiddleware from 'node-sass-middleware'
+import { join } from "path"
+import session from "express-session"
+import { config } from "./config.js"
+import __KnexSessionStore from "connect-session-knex"
+import __knex from "knex"
+import dirname from "es-dirname"
+
+
+const KnexSessionStore = __KnexSessionStore(session)
+const knex = __knex({
     client: "sqlite3",
     connection: {
         filename: "./nounscale.noundb"
@@ -12,24 +20,24 @@ const knex = require("knex")({
     useNullAsDefault: true
 })
 
-const session = require("express-session")
-const KnexSessionStore = require("connect-session-knex")(session)
-
 const store = new KnexSessionStore({ tablename: "sessions", createtable: true, knex })
 
-if (!knex.schema.hasTable("settings")) {
-    knex.schema.createTable("settings", table => {
+if (!await knex.schema.hasTable("settings")) {
+    await knex.schema.createTable("settings", table => {
         table.string("key", 255)
         table.text("value")
     })
 }
 
-module.exports = { knex }
+export default { knex }
+
+import apiRoute from "./routers/api.js"
+import adminRoute from "./routers/admin.js"
 
 const app = express()
 
 app.use(session({
-    secret: "eeeeeeeeeee", // change this
+    secret: config.cookieSecret,
     name: "nss",
     resave: false,
     store,
@@ -45,14 +53,15 @@ app.use(cors())
 app.use(express.json())
 
 app.use(sassMiddleware({
-    src: join(__dirname, 'public'),
-    dest: join(__dirname, 'public'),
+    src: join(dirname(), 'public'),
+    dest: join(dirname(), 'public'),
     outputStyle: 'compressed'
 }))
 
 app.use(express.static("public"))
 
-app.use("/admin", require("./routers/admin"))
+app.use("/admin", adminRoute)
+app.use("/api", apiRoute)
 
 app.get("/", (req, res) => {
     res.render("index")

@@ -3,7 +3,47 @@
 <div class="padding-container">
     <h1>Please Log In</h1>
     <div>
-        <input class="input" type="password" placeholder="Admin Password" />
+        <input class="input" type="password" placeholder="Admin Password" id="password" />
     </div>
-    <a class="button">Confirm</a>
+    <a class="button" id="confirm">Confirm</a>
+    <div class="error-text" style="margin-top: 2rem;"></div>
 </div>
+
+<script>
+    const password = document.querySelector("#password")
+    const confirm = document.querySelector("#confirm")
+
+    const setLoginError = text => {
+        document.querySelector(".error-text").innerText = text
+    }
+
+    password.addEventListener("input", () => {
+        setLoginError("")
+    })
+
+    confirm.addEventListener("click", () => {
+        if (!password.value) return setLoginError("A password is required.")
+
+        fetch("/admin/loginapi", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({
+                password: password.value
+            })
+        }).then(r => r.json()).then(json => {
+            if (json.error) {
+                return setLoginError(json.error)
+            }
+
+            if (json.success) {
+                window.location.reload()
+                return
+            }
+
+            setLoginError("Unknown error")
+            return
+        })
+    })
+</script>

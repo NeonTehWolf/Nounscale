@@ -36,6 +36,8 @@ $max-height-with-navbar: calc(100vh - #{$navbar-height + ($navbar-padding * 2)})
     display: flex;
     flex-direction: column;
     height: $max-height-with-navbar;
+    opacity: 1;
+    transition: 0.4s;
 
     .word-upper,
     .word-lower {
@@ -62,7 +64,7 @@ $max-height-with-navbar: calc(100vh - #{$navbar-height + ($navbar-padding * 2)})
     }
 
     .word-upper {
-        background: linear-gradient(40deg, rgb(201, 250, 24), rgb(243, 61, 152));
+        background: linear-gradient(40deg, rgb(245, 150, 41), rgb(243, 61, 152));
 
         &:hover {
             #upper-word {
@@ -79,6 +81,10 @@ $max-height-with-navbar: calc(100vh - #{$navbar-height + ($navbar-padding * 2)})
                 transform: scale(1.25);
             }
         }
+    }
+
+    &.confirmed {
+        opacity: 0;
     }
 }
 
@@ -110,6 +116,10 @@ $max-height-with-navbar: calc(100vh - #{$navbar-height + ($navbar-padding * 2)})
     background-image: linear-gradient(45deg, #8a60d3, #3e70c9);
     cursor: pointer;
     user-select: none;
+
+    &.danger {
+        background-image: linear-gradient(45deg, #d3606f, #c93e3e);
+    }
 }
 
 .padding-container {
@@ -132,9 +142,44 @@ $max-height-with-navbar: calc(100vh - #{$navbar-height + ($navbar-padding * 2)})
     border: none;
     margin-bottom: 2rem;
     min-width: 20rem;
-    width: 50vh;
-    max-width: 50vh;
+    width: 50vw;
+    max-width: 40rem;
     background-color: #eee;
     padding: 1rem;
     font-size: 1rem;
+}
+
+.error-text {
+    color: red;
+}
+
+.green-text {
+    color: green;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    margin-top: 0.2rem;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader {
+    width: 5em;
+    height: 5em;
+    animation: spin 0.8s linear infinite;
 }

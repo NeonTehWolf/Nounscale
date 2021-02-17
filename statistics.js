@@ -1,10 +1,14 @@
 const stats = require('simple-statistics')
 
-// Evan Miller's algorithm for ranking stuff based on upvotes
-
-// Node.js implementation from => https://gist.github.com/Gattermeier/d89024e3f6d054dea952220387fe7bc5
-
-module.exports.lowerBound = (upvotes, n = 0, confidence = 0.95) => {
+/**
+ * Evan Miller's algorithm for ranking stuff based on upvotes
+ * @param {Number} upvotes Number of Upvotes
+ * @param {Number} n Total number of votes
+ * @param {Number} confidence Confidence
+ * @author Matthias Gattermeier
+ * @see Gist: git.io/Jt1H8
+ */
+export const lowerBound = (upvotes, n = 0, confidence = 0.95) => {
     if (n === 0) return 0
 
     const z = stats.probit(1 - (1 - confidence) / 2)
